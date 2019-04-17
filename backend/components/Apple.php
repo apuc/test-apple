@@ -58,8 +58,26 @@ class Apple extends Component
         return true;
     }
 
+    /**
+     * Возвращает атрибуты модели
+     *
+     * @return array
+     */
     public function getAttributes()
     {
         return $this->model->attributes;
+    }
+
+    /**
+     * Генерирует новые яблоки случайного цвета
+     *
+     * @param $count
+     */
+    public static function generate($count)
+    {
+        $colors = ColorModel::find()->asArray()->all();
+        for ($i = 0; $i < $count; $i++) {
+            new self($colors[array_rand($colors)]['name']);
+        }
     }
 }

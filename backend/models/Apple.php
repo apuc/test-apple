@@ -136,6 +136,11 @@ class Apple extends \yii\db\ActiveRecord
         return $this->colorModel->name;
     }
 
+    public function getColorTitle()
+    {
+        return $this->colorModel->title;
+    }
+
     /**
      * Возвращает список всех возможных статусов
      *
