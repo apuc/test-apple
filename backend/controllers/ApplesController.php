@@ -1,7 +1,9 @@
 <?php
+
 namespace backend\controllers;
 
 use Yii;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -45,5 +47,19 @@ class ApplesController extends Controller
         ]);
 
         return $this->render('index', ['form_model' => $form_model, 'dataProvider' => $dataProvider]);
+    }
+
+    public function actionFall($id, $page = null)
+    {
+        $apple = Apple::findOne($id);
+        $apple->fallToGround();
+        return $this->redirect(Url::to(['index', 'page' => $page]));
+    }
+
+    public function actionEat($id, $count, $page = null)
+    {
+        $apple = Apple::findOne($id);
+        return $apple->eat((int)$count) ? json_encode(['status' => 'success']) : json_encode(['status' => 'error']+$apple->errors);
+        //return $this->redirect(Url::to(['index', 'page' => $page]));
     }
 }

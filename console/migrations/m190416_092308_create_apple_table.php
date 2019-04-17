@@ -23,7 +23,7 @@ class m190416_092308_create_apple_table extends Migration
             'size' => $this->double()->unsigned()->notNull()->defaultValue(1),
             'status' => $this->tinyInteger(1)->notNull()->defaultValue(1)->comment('1 - на дереве, 2 - упало, 3 - испорчено, 4 - съедено'),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
-            'fallen_at' => $this->timestamp(),
+            'fallen_at' => $this->timestamp()->null()->defaultValue(null),
         ], $tableOptions);
     }
 
